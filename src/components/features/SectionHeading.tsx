@@ -1,0 +1,3 @@
+import { Flame } from 'lucide-react';
+interface Props{eyebrow:string;title:string;accent?:string;description?:string;dark?:boolean;children?:React.ReactNode}
+export default function SectionHeading({eyebrow,title,accent,description,dark,children}:Props){return <div className="mb-8 flex flex-wrap items-end justify-between gap-5"><div><p className={`eyebrow mb-3 ${dark?'!text-gold':''}`}><Flame size={15}/>{eyebrow}</p><h2 className={`section-title ${dark?'text-surface':''}`}>{title} <span className={dark?'text-gold':'text-primary'}>{accent}</span></h2>{description&&<p className={`mt-3 max-w-xl text-sm leading-relaxed ${dark?'text-cream':'text-muted'}`}>{description}</p>}</div>{children}</div>}

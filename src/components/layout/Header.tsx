@@ -1,0 +1,11 @@
+import { useState } from 'react';
+import { ShoppingBag, Search, Menu, X, ArrowUpRight } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
+import Logo from '@/components/layout/Logo';
+import SearchForm from '@/components/forms/SearchForm';
+import { useRestaurant } from '@/stores/RestaurantContext';
+const LINKS=[['home','Home'],['menu','Menu'],['categories','Categories'],['best-sellers','Best Sellers'],['deals','Deals'],['contact','Contact']];
+export default function Header(){
+ const {count,setCartOpen}=useRestaurant();const [mobile,setMobile]=useState(false);const [search,setSearch]=useState(false);const location=useLocation();const prefix=location.pathname==='/'?'':'/';
+ return <header className="sticky top-0 z-40 border-b border-gold/15 bg-ink text-surface"><div className="container-shell flex h-20 items-center justify-between gap-5"><Logo/><nav aria-label="Main navigation" className="header-nav hidden items-center gap-6 text-[13px] font-semibold xl:flex">{LINKS.map(([id,name])=><a key={id} href={`${prefix}#${id}`} className="py-3 hover:text-gold">{name}</a>)}</nav><div className="flex items-center gap-1 sm:gap-3"><button className="icon-button" aria-label="Search menu" onClick={()=>setSearch(!search)}><Search size={20}/></button><button className="icon-button relative" aria-label={`Open cart, ${count} items`} onClick={()=>setCartOpen(true)}><ShoppingBag size={21}/>{count>0&&<span className="absolute right-0 top-0 flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold">{count}</span>}</button><a href={`${prefix}#menu`} className="btn-primary hidden !min-h-10 !px-5 sm:inline-flex">Order Now <ArrowUpRight size={16}/></a><button className="icon-button xl:hidden" aria-label="Toggle navigation" aria-expanded={mobile} onClick={()=>setMobile(!mobile)}>{mobile?<X/>:<Menu/>}</button></div></div>{search&&<SearchForm onClose={()=>setSearch(false)}/>} {mobile&&<nav className="container-shell grid grid-cols-2 gap-2 border-t border-gold/15 py-4 xl:hidden" aria-label="Mobile navigation">{LINKS.map(([id,name])=><a key={id} href={`${prefix}#${id}`} onClick={()=>setMobile(false)} className="rounded-lg px-3 py-3 text-sm hover:bg-primary">{name}</a>)}</nav>}</header>
+}

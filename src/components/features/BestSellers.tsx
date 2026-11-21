@@ -1,0 +1,6 @@
+import { useRef } from 'react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { useRestaurant } from '@/stores/RestaurantContext';
+import SectionHeading from '@/components/features/SectionHeading';
+import ProductCard from '@/components/features/ProductCard';
+export default function BestSellers(){const {data}=useRestaurant();const rail=useRef<HTMLDivElement>(null);return <section id="best-sellers" className="border-y border-line bg-cream section-space"><div className="container-shell"><SectionHeading eyebrow="The crowd has spoken" title="LOCAL FAVOURITES." accent="LEGENDARY BITES." description="The go-to picks when only the best will do."><div className="flex gap-2"><button className="icon-button border border-line bg-surface" aria-label="Previous best sellers" onClick={()=>rail.current?.scrollBy({left:-320,behavior:'smooth'})}><ArrowLeft size={18}/></button><button className="icon-button border border-primary/20 bg-surface text-primary" aria-label="Next best sellers" onClick={()=>rail.current?.scrollBy({left:320,behavior:'smooth'})}><ArrowRight size={18}/></button></div></SectionHeading><div ref={rail} className="scroll-rail flex gap-5 overflow-x-auto pb-4">{data.products.filter(p=>p.active&&p.bestSeller).map(p=><div key={p.id} className="w-[265px] shrink-0 sm:w-[290px]"><ProductCard product={p} featured/></div>)}</div></div></section>}

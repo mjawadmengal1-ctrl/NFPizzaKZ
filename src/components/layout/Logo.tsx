@@ -1,0 +1,3 @@
+import { Pizza } from 'lucide-react';
+import { Link } from 'react-router-dom';
+export default function Logo(){return <Link to="/" aria-label="NF Pizza KZ home" className="flex shrink-0 items-center gap-2.5"><span className="relative flex h-12 w-12 -rotate-6 items-center justify-center rounded-lg border-2 border-gold bg-primary font-display text-3xl font-extrabold text-surface">NF<Pizza size={14} className="absolute -right-2 -top-2 rotate-12 fill-gold text-ink"/></span><span><span className="block font-display text-2xl font-bold leading-none tracking-wide text-surface">PIZZA <span className="text-gold">KZ</span></span><span className="mt-1 block text-[9px] font-semibold tracking-[.25em] text-gold">KHUZDAR'S FOOD FIX</span></span></Link>}
